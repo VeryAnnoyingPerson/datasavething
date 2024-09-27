@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML with Data Store</title>
+  <title>User Login with Data Store</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,41 +17,51 @@
 </head>
 <body>
 
-  <h1>Simple Data Store Example</h1>
+  <h1>User Login Example</h1>
 
-  <label for="dataInput">Enter some data:</label>
-  <input type="text" id="dataInput" placeholder="Enter data here">
-  <button onclick="saveData()">Save Data</button>
+  <label for="usernameInput">Username:</label>
+  <input type="text" id="usernameInput" placeholder="Enter your username">
+  <br>
 
-  <h2>Stored Data:</h2>
-  <p id="storedData">No data stored yet.</p>
+  <label for="passwordInput">Password:</label>
+  <input type="password" id="passwordInput" placeholder="Enter your password">
+  <br>
+
+  <button onclick="saveCredentials()">Save Credentials</button>
+
+  <h2>Stored User Information:</h2>
+  <p id="storedUsername">No user information stored yet.</p>
 
   <script>
-    // Function to save data to localStorage
-    function saveData() {
-      const data = document.getElementById('dataInput').value;
-      if (data) {
-        localStorage.setItem('myData', data);
-        displayData();
+    // Function to save username and password to localStorage
+    function saveCredentials() {
+      const username = document.getElementById('usernameInput').value;
+      const password = document.getElementById('passwordInput').value;
+
+      if (username && password) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);  // WARNING: Do not store plaintext passwords in real apps.
+        displayStoredUser();
       } else {
-        alert('Please enter some data.');
+        alert('Please enter both username and password.');
       }
     }
 
-    // Function to display the stored data
-    function displayData() {
-      const storedData = localStorage.getItem('myData');
-      const displayElement = document.getElementById('storedData');
-      if (storedData) {
-        displayElement.textContent = storedData;
+    // Function to display the stored username
+    function displayStoredUser() {
+      const storedUsername = localStorage.getItem('username');
+      const displayElement = document.getElementById('storedUsername');
+
+      if (storedUsername) {
+        displayElement.textContent = `Stored Username: ${storedUsername}`;
       } else {
-        displayElement.textContent = 'No data stored yet.';
+        displayElement.textContent = 'No user information stored yet.';
       }
     }
 
-    // On page load, display the stored data (if any)
+    // On page load, display the stored user information
     window.onload = function() {
-      displayData();
+      displayStoredUser();
     };
   </script>
 
