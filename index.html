@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML with Data Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simple Data Store Example</h1>
+
+  <label for="dataInput">Enter some data:</label>
+  <input type="text" id="dataInput" placeholder="Enter data here">
+  <button onclick="saveData()">Save Data</button>
+
+  <h2>Stored Data:</h2>
+  <p id="storedData">No data stored yet.</p>
+
+  <script>
+    // Function to save data to localStorage
+    function saveData() {
+      const data = document.getElementById('dataInput').value;
+      if (data) {
+        localStorage.setItem('myData', data);
+        displayData();
+      } else {
+        alert('Please enter some data.');
+      }
+    }
+
+    // Function to display the stored data
+    function displayData() {
+      const storedData = localStorage.getItem('myData');
+      const displayElement = document.getElementById('storedData');
+      if (storedData) {
+        displayElement.textContent = storedData;
+      } else {
+        displayElement.textContent = 'No data stored yet.';
+      }
+    }
+
+    // On page load, display the stored data (if any)
+    window.onload = function() {
+      displayData();
+    };
+  </script>
+
+</body>
+</html>
